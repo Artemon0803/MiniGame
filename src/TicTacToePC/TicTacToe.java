@@ -52,20 +52,24 @@ public class TicTacToe {
     }
 
     boolean gameOver(){
-        int x=0, y=0;
         for(int i=0; i<3; i++){ //For all 3 rows and columns
-            if(field[y+i][x]==field[y+i][x+1] & field[y+i][x]==field[y+i][x+2] & field[y+i][x]!=' ') return true; //Check row
-            if(field[y][x+i]==field[y+1][x+i] & field[y][x+i]==field[y+2][x+i] & field[y][x+i]!=' ') return true; //Check column
+            if(checkLine(field[i][0], field[i][1], field[i][2])) return true; //Check row
+            if(checkLine(field[0][i], field[1][i], field[2][i])) return true; //Check column
         }
-        if(field[y][x]==field[y+1][x+1] & field[y][x]==field[y+2][x+2] & field[y][x]!=' ') return true; //Check main diagonal
-        if(field[y+2][x]==field[y+1][x+1] & field[y+2][x]==field[y][x+2] & field[y+2][x]!=' ') return true; //Check second diagonal
+        if(checkLine(field[0][0], field[1][1], field[2][2])) return true; //Check main diagonal
+        if(checkLine(field[2][0], field[1][1], field[0][2])) return true;//Check second diagonal
+        //Check for tie
         if(turn==10) tie=true;
-        return false;
+        return false; //Game is not over
+    }
+
+    private boolean checkLine(char a, char b, char c) {
+        return a == b && b == c && a != ' '; //Winning condition: all symbols are identical and not empty
     }
 
     void checkWinner(){
-        if(turn%2==0 & !tie) System.out.println("Winner: O");
-        else if(turn%2!=0 & !tie) System.out.println("Winner: X");
+        if(turn%2==0 && !tie) System.out.println("Winner: O");
+        else if(turn%2!=0 && !tie) System.out.println("Winner: X");
         else System.out.println("Tie");
     }
 }
