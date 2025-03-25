@@ -10,7 +10,7 @@ public class TicTacToe {
             int count=0;
             for(char y : x){
                 System.out.print(y);
-                if(count==0 | count==1) System.out.print(" | ");
+                if(count==0 | count==1) System.out.print(" | "); //Print '|' only after the 1st and 2nd cells
                 count++;
             }
             System.out.print("\n");
@@ -18,19 +18,19 @@ public class TicTacToe {
     }
 
     void userTurn(int x, int y){
-        --x; --y;
+        --x; --y; //Input coordinates are larger by 1 for user convenience => Decrease the coordinates by 1
         if(validation(x, y)){
-            field[y][x]=(turn%2!=0) ? 'O' : 'X';
+            field[y][x]=(turn%2!=0) ? 'O' : 'X'; //For PvP; odd turns are always 'O', even - 'X' <= 'O' is always first turn
             ++turn;
         }
     }
 
     void PCTurn(){
         if(turn!=10) {
-            int[] PCturn = TTTPC.pcTurn(field); //Get PC slot cords
+            int[] PCturn = TTTPC.pcTurn(field); //Get PC cell cords
             int x = PCturn[1];
             int y = PCturn[0];
-            if (validation(x, y)) {
+            if(validation(x, y)) {
                 field[y][x] = 'X';
                 ++turn;
             }
@@ -44,7 +44,7 @@ public class TicTacToe {
             rez = false;
         } else {
             if(field[y][x]!=' '){
-                System.out.println("The field is occupied!");
+                System.out.println("This cell is occupied!");
                 rez = false;
             } else rez = true;
         }
@@ -53,19 +53,19 @@ public class TicTacToe {
 
     boolean gameOver(){
         int x=0, y=0;
-        for(int i=0; i<3; i++){
-            if(field[y+i][x]==field[y+i][x+1] & field[y+i][x]==field[y+i][x+2] & field[y+i][x]!=' ') return true;
-            if(field[y][x+i]==field[y+1][x+i] & field[y][x+i]==field[y+2][x+i] & field[y][x+i]!=' ') return true;
+        for(int i=0; i<3; i++){ //For all 3 rows and columns
+            if(field[y+i][x]==field[y+i][x+1] & field[y+i][x]==field[y+i][x+2] & field[y+i][x]!=' ') return true; //Check row
+            if(field[y][x+i]==field[y+1][x+i] & field[y][x+i]==field[y+2][x+i] & field[y][x+i]!=' ') return true; //Check column
         }
-        if(field[y][x]==field[y+1][x+1] & field[y][x]==field[y+2][x+2] & field[y][x]!=' ') return true;
-        if(field[y+2][x]==field[y+1][x+1] & field[y+2][x]==field[y][x+2] & field[y+2][x]!=' ') return true;
+        if(field[y][x]==field[y+1][x+1] & field[y][x]==field[y+2][x+2] & field[y][x]!=' ') return true; //Check main diagonal
+        if(field[y+2][x]==field[y+1][x+1] & field[y+2][x]==field[y][x+2] & field[y+2][x]!=' ') return true; //Check second diagonal
         if(turn==10) tie=true;
         return false;
     }
 
-    String checkWinner(){
-        if(turn%2==0 & !tie) return "Winner: O";
-        else if(turn%2!=0 & !tie) return "Winner: X";
-        else return "Tie";
+    void checkWinner(){
+        if(turn%2==0 & !tie) System.out.println("Winner: O");
+        else if(turn%2!=0 & !tie) System.out.println("Winner: X");
+        else System.out.println("Tie");
     }
 }

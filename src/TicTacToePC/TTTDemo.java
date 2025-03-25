@@ -3,11 +3,11 @@ package TicTacToePC;
 import java.util.Scanner;
 
 public class TTTDemo {
-    static void PvP(){
+    private static void PvP(){ //Player vs Player
         TicTacToe game = new TicTacToe();
         Scanner scanner = new Scanner(System.in);
         int x, y;
-        System.out.println("Welcome to TicTacToe game!\nFirst turn as: O");
+        System.out.println("You play as O\nFirst turn: O");
         game.fieldShow();
         do{
             System.out.print("Enter x position: ");
@@ -18,14 +18,14 @@ public class TTTDemo {
             game.fieldShow();
         } while(!game.gameOver());
         System.out.println("Game Over!");
-        System.out.println(game.checkWinner());
+        game.checkWinner();
     }
 
-    static void PvPC(){
+    private static void PvPC(){ //Player vs PC
         TicTacToe game = new TicTacToe();
         Scanner scanner = new Scanner(System.in);
         int x, y;
-        System.out.println("Welcome to TicTacToe game!\nYou play as O\nFirst turn as: O");
+        System.out.println("You play as O\nFirst turn: O");
         game.fieldShow();
         do{
             System.out.print("Enter x position: ");
@@ -40,14 +40,14 @@ public class TTTDemo {
             game.fieldShow();
         } while(!game.gameOver());
         System.out.println("Game Over!");
-        System.out.println(game.checkWinner());
+        game.checkWinner();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //Start
         Scanner scanner = new Scanner(System.in);
         int mode;
 
-        System.out.println("Choose game mode\n1-PvP\n2-PvPC: ");
+        System.out.println("Welcome to TicTacToe game!\nChoose game mode:\n1-PvP\n2-PvPC ");
         mode=scanner.nextInt();
 
         if(mode==1) PvP();
