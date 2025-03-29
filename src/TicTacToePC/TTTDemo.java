@@ -6,14 +6,18 @@ public class TTTDemo {
     private static void PvP(){ //Player vs Player
         TicTacToe game = new TicTacToe();
         Scanner scanner = new Scanner(System.in);
-        int x, y;
         System.out.println("You play as O\nFirst turn: O");
         game.fieldShow();
         do{
-            System.out.print("Enter x position: ");
+            int tmp, x, y;
+            System.out.print("Enter x and y like (11) position: ");
+            tmp=scanner.nextInt();
+            x=tmp/10;
+            y=tmp%10;
+            /*System.out.print("Enter x position: ");
             x=scanner.nextInt();
             System.out.print("Enter y position: ");
-            y=scanner.nextInt();
+            y=scanner.nextInt();*/
             game.userTurn(x, y);
             game.fieldShow();
         } while(!game.gameOver());
@@ -24,17 +28,22 @@ public class TTTDemo {
     private static void PvPC(){ //Player vs PC
         TicTacToe game = new TicTacToe();
         Scanner scanner = new Scanner(System.in);
-        int x, y;
         System.out.println("You play as O\nFirst turn: O");
         game.fieldShow();
         do{
-            System.out.print("Enter x position: ");
+            int tmp, x, y;
+            System.out.print("Enter x and y like (11) position: ");
+            tmp=scanner.nextInt();
+            x=tmp/10;
+            y=tmp%10;
+            /*System.out.print("Enter x position: ");
             x=scanner.nextInt();
             System.out.print("Enter y position: ");
-            y=scanner.nextInt();
+            y=scanner.nextInt();*/
             System.out.println("Your turn:");
             game.userTurn(x, y);
             game.fieldShow();
+            if(game.gameOver()) break;
             System.out.println("PC's turn:");
             game.PCTurn();
             game.fieldShow();
